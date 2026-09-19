@@ -37,7 +37,7 @@
     "@taiga-ui/icons": "^5.7.0",
     "@taiga-ui/kit": "^5.7.0",
     "angular-split": "^20.0.0",
-    "fast-average-color": "^9.5.2",
+    "fast-average-color": "^9.6.0",
     "firebase": "^12.13.0",
     "modern-normalize": "^3.0.1",
     "rxjs": "~7.8.0",
