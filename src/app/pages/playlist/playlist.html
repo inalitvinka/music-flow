@@ -6,7 +6,7 @@
     (playClicked)="playPlaylist()"
     (editClicked)="editPlaylistDetails()"
     (deleteClicked)="isDeleteModalOpen.set(true)"
-    (coverLoaded)="extractColor($event)"
+    (coverLoaded)="getPlaylistColor($event)"
   />
   <div cdkDropList class="track-list" (cdkDropListDropped)="dropTrack($event)">
     @if (playlist.trackIds?.length) {

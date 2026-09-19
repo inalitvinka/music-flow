@@ -7,11 +7,11 @@
           @for (imgUrl of data.coverUrl; track imgUrl; let isFirst = $first) {
             @if (isFirst) {
               <img
-                #coverImg
+                playerAverageColor
                 [src]="imgUrl"
                 alt="Playlist cover"
                 class="playlist-cover-img"
-                (load)="coverLoaded.emit(coverImg)"
+                (color)="coverLoaded.emit($event)"
                 crossOrigin="anonymous"
               />
             } @else {
@@ -21,11 +21,11 @@
         </div>
       } @else if (data.coverUrl?.length === 1) {
         <img
-          #coverImg
+          playerAverageColor
           [src]="data.coverUrl[0]"
           alt="Playlist cover"
           class="playlist-cover-img"
-          (load)="coverLoaded.emit(coverImg)"
+          (color)="coverLoaded.emit($event)"
           crossOrigin="anonymous"
         />
       } @else {

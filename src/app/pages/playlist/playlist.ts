@@ -6,7 +6,7 @@ import {
   resource,
   signal,
   computed,
-  HostBinding,
+  ElementRef,
   effect,
 } from '@angular/core';
 import { Router } from '@angular/router';
@@ -19,7 +19,6 @@ import {
   moveItemInArray,
   CdkDragPreview,
 } from '@angular/cdk/drag-drop';
-import { FastAverageColor } from 'fast-average-color';
 import { TrackService } from '@core/api/track/track-service';
 import { PlaylistApiService } from '@core/services/playlist/playlist-api-service';
 import { ToastService } from '@core/services/toast/toast-service';
@@ -74,6 +73,7 @@ export class Playlist {
   private playlistService = inject(PlaylistApiService);
   private router = inject(Router);
   private toast = inject(ToastService);
+  private elementRef = inject(ElementRef);
 
   protected id = input.required<string>();
 
@@ -177,10 +177,10 @@ export class Playlist {
   });
 
   constructor() {
-    // effect(() => {
-    //   this.localService.currentPlaylistId.set(this.id());
-    // });
-
+    effect(() => {
+      const color = this.playlistColor();
+      this.elementRef.nativeElement.style.setProperty('--playlist-color', color);
+    });
     effect(() => {
       const tracks = this.tracksResource.value();
       if (tracks && tracks.length) {
@@ -203,19 +203,8 @@ export class Playlist {
     });
   }
 
-  @HostBinding('style.--playlist-color')
-  protected get hostPlaylistColor() {
-    return this.playlistColor();
-  }
-
-  protected extractColor(imageElement: HTMLImageElement) {
-    const fac = new FastAverageColor();
-    try {
-      const color = fac.getColor(imageElement);
-      this.playlistColor.set(color.hex);
-    } catch (error) {
-      console.error(error);
-    }
+  protected getPlaylistColor(hex: string) {
+    return this.playlistColor.set(hex);
   }
 
   protected toggleFindButton() {
