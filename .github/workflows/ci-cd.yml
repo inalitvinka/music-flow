@@ -8,7 +8,7 @@ on:
     branches: [main, dev]
 
   push:
-    branches: [main, dev, feat/add-and-reorder-tracks]
+    branches: [main, dev]
 
 jobs:
   lint-and-build:
@@ -54,8 +54,7 @@ jobs:
   deploy:
     needs: [lint-and-build]
 
-    # if: github.ref == 'refs/heads/dev'
-    if: github.ref == 'refs/heads/feat/add-and-reorder-tracks'
+    if: github.ref == 'refs/heads/dev'
 
     runs-on: ubuntu-latest
 
