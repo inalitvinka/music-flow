@@ -22,6 +22,6 @@ export class PlaylistHeader {
   playClicked = output();
   editClicked = output();
   deleteClicked = output();
-  protected coverLoaded = output<string>();
+  coverLoaded = output<string>();
   protected MOSAIC_COVERS_COUNT = MOSAIC_COVERS_COUNT;
 }

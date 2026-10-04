@@ -21,6 +21,10 @@
     width: rem(40);
     height: rem(40);
   }
+
+  @include mix.mobile {
+    transform: rotate(0deg);
+  }
 }
 
 /* stylelint-disable-next-line selector-pseudo-element-no-unknown */
