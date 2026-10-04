@@ -33,6 +33,9 @@
   gap: var(--space-s);
 
   .icon-wrapper {
+    position: relative;
+
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,6 +51,17 @@
     background-color: var(--color-surface);
 
     @include mix.main-transition('background-color, color');
+
+    &:has(.library-cover-img),
+    &:has(.library-cover-mosaic) {
+      border: none;
+    }
+  }
+
+  .library-cover-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .library-create-icon {
@@ -65,6 +79,20 @@
 
     .library-create-icon {
       color: var(--color-success);
+    }
+  }
+
+  .library-cover-mosaic {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+
+    .library-cover-img {
+      flex-shrink: 0;
+      width: 50%;
+      height: 50%;
+      object-fit: cover;
     }
   }
 

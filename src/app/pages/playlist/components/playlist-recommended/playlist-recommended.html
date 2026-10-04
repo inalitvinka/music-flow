@@ -1,0 +1,26 @@
+<h2>Recommended</h2>
+<div class="recommend-list">
+  @for (track of tracks(); track track.id) {
+    <player-track-row [track]="track">
+      <span row-meta class="track-album">{{ track.album.name }}</span>
+      <button row-actions class="track-add" (click)="trackAdd.emit(track)">
+        <player-sprite icon="add-track" />
+      </button>
+    </player-track-row>
+  } @empty {
+    @if (isLoading()) {
+      <p>Looking for more songs...</p>
+    } @else {
+      <p>No new recommendations available. Try hitting Refresh!</p>
+    }
+  }
+</div>
+<button
+  playerButton
+  variant="base"
+  (click)="refresh.emit()"
+  [loading]="isLoading()"
+  class="refresh-button"
+>
+  Refresh
+</button>

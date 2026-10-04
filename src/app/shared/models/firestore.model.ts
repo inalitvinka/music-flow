@@ -3,6 +3,7 @@ export interface Playlist {
   name: string;
   description?: string;
   trackIds: string[];
+  coverUrl?: string[];
   uid: string;
 }
 

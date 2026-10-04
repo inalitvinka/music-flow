@@ -17,13 +17,24 @@
     </div>
 
     @for (playlist of playlistsResource.value(); track playlist.id) {
+      @let count = playlist.trackIds?.length ?? 0;
       <div class="create-playlist-card" tabindex="0" [routerLink]="['/playlists', playlist.id]">
         <div class="icon-wrapper">
-          <player-sprite icon="music" class="library-create-icon" />
+          @if (playlist.coverUrl?.length === 4) {
+            <div class="library-cover-mosaic">
+              @for (imgUrl of playlist.coverUrl; track imgUrl) {
+                <img [src]="imgUrl" alt="Playlist collage piece" class="library-cover-img" />
+              }
+            </div>
+          } @else if (playlist.coverUrl?.length === 1) {
+            <img [src]="playlist.coverUrl[0]" alt="Playlist cover" class="library-cover-img" />
+          } @else {
+            <player-sprite icon="music" class="library-create-icon" />
+          }
         </div>
         <div class="card-info">
           <span class="title" [title]="playlist.name">{{ playlist.name }}</span>
-          <span class="subtitle">{{ playlist.trackIds?.length ?? 0 }} tracks</span>
+          <span class="subtitle">{{ count }} {{ count | pluralText: 'track' }}</span>
         </div>
       </div>
     }

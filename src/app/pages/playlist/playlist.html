@@ -1,27 +1,52 @@
 @if (playlistResource.value(); as playlist) {
   <player-playlist-header
     [playlist]="playlist"
-    [displayName]="displayName()"
     [totalTime]="totalTime()"
     [isPlaying]="isPlaying()"
     (playClicked)="playPlaylist()"
     (editClicked)="editPlaylistDetails()"
     (deleteClicked)="isDeleteModalOpen.set(true)"
+    (coverLoaded)="getPlaylistColor($event)"
   />
-  <div class="track-list">
+  <div cdkDropList class="track-list" (cdkDropListDropped)="dropTrack($event)">
     @if (playlist.trackIds?.length) {
       <player-tracks-header />
     }
-    @for (track of tracksResource.value(); track track.id; let index = $index) {
-      <player-track-row [index]="index" [track]="track">
+    @for (track of stableTracks(); track track.id; let index = $index) {
+      <player-track-row [index]="index" [track]="track" cdkDrag>
+        <div *cdkDragPreview class="custom-drag-preview">
+          {{ track.name }} • {{ track.artist.name }}
+        </div>
         <span row-meta class="track-album">{{ track.album.name }}</span>
         <span row-actions class="track-duration">{{ track.duration | duration }}</span>
-        <button row-actions class="track-remove" (click)="removeTrackById(track.id)">
-          <player-sprite icon="close" />
-        </button>
+        <player-context-menu row-actions>
+          <button tuiOption type="button" (click)="removeFromPlaylist(track)">
+            <player-sprite icon="delete" />
+            <span>Remove from playlist</span>
+          </button>
+        </player-context-menu>
       </player-track-row>
     }
   </div>
+  @if (isSearchOpen()) {
+    <player-playlist-search
+      [tracks]="filteredSearchResults()"
+      [isLoading]="searchResultResource.isLoading()"
+      (queryChange)="searchQuery.set($event)"
+      (trackAdd)="addToPlaylist($event)"
+      (closeSearch)="toggleFindButton()"
+    />
+  } @else {
+    <button playerButton variant="base" (click)="toggleFindButton()" class="search-open">
+      Find more
+    </button>
+    <player-playlist-recommended
+      [tracks]="stableRecommendedTracks()"
+      [isLoading]="recommendedTracksResource.isLoading()"
+      (trackAdd)="addToPlaylist($event)"
+      (refresh)="refreshRecommendations()"
+    />
+  }
 } @else if (playlistResource.isLoading()) {
   <p class="loading">Loading...</p>
 } @else {

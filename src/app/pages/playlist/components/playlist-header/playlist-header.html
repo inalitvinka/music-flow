@@ -1,9 +1,37 @@
 @let data = playlist();
-<div class="playlist-header-container">
-  <div class="playlist-header">
-    <div class="playlist-cover-wrapper">
-      <player-sprite icon="music" class="playlist-cover-icon" />
-      <div class="cover-hover-overlay">
+<div class="playlist-header">
+  <div class="playlist-header-container">
+    <div class="playlist-cover">
+      @if (data.coverUrl?.length === MOSAIC_COVERS_COUNT) {
+        <div class="playlist-cover-mosaic">
+          @for (imgUrl of data.coverUrl; track imgUrl; let isFirst = $first) {
+            @if (isFirst) {
+              <img
+                playerAverageColor
+                [src]="imgUrl"
+                alt="Playlist cover"
+                class="playlist-cover-img"
+                (color)="coverLoaded.emit($event)"
+                crossOrigin="anonymous"
+              />
+            } @else {
+              <img [src]="imgUrl" alt="Playlist cover" class="playlist-cover-img" />
+            }
+          }
+        </div>
+      } @else if (data.coverUrl?.length === 1) {
+        <img
+          playerAverageColor
+          [src]="data.coverUrl[0]"
+          alt="Playlist cover"
+          class="playlist-cover-img"
+          (color)="coverLoaded.emit($event)"
+          crossOrigin="anonymous"
+        />
+      } @else {
+        <player-sprite icon="music" class="playlist-cover-icon" />
+      }
+      <div class="playlist-cover-overlay">
         <player-sprite icon="edit" class="edit-icon" />
         <span>Choose photo</span>
       </div>
@@ -13,19 +41,17 @@
       <h1 class="playlist-title" [title]="data.name">{{ data.name }}</h1>
       <p class="playlist-description">{{ data.description ?? '' }}</p>
       <div class="playlist-stats">
-        <span class="playlist-displayname"> {{ displayName() }} </span>
         @if (data.trackIds?.length) {
+          @let count = data.trackIds.length;
+          <span class="playlist-tracks-count"> {{ count }} {{ count | pluralText: 'song' }}</span>
           <span class="playlist-header-separator">•</span>
-          <span class="playlist-tracks-count"> {{ data.trackIds.length }} songs, </span>
-          <div class="playlist-total-time">
-            <span> {{ totalTime() | durationText }} </span>
-          </div>
+          <span class="playlist-total-time">{{ totalTime() | durationText }}</span>
         }
       </div>
     </div>
   </div>
 </div>
-<div class="palylist-header-actions">
+<div class="playlist-header-actions">
   <button
     variant="primary"
     playerButton="playlist-header-play-btn"

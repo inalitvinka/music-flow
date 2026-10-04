@@ -1,7 +1,12 @@
 @use 'utils/funcs' as *;
 @use 'utils/mixins' as mix;
 
-.tracks-header-row {
+:host {
+  --track-cover-width: #{rem(56)};
+  --track-text-min-width: #{rem(180)};
+}
+
+.tracks-header {
   display: flex;
   gap: var(--space-m);
   align-items: center;
@@ -9,7 +14,11 @@
 
   margin-bottom: var(--space-m);
   padding: var(--space-s) var(--space-m);
-  border-bottom: 2px solid var(--color-border-subtle);
+  border-bottom: 1px solid var(--color-surface);
+
+  @include mix.tablet {
+    padding: var(--space-xs) var(--space-xs);
+  }
 
   .header-label {
     font-size: var(--text-s);
@@ -24,42 +33,35 @@
   }
 }
 
-.track-left-side {
-  display: flex;
-  flex-shrink: 0;
-  align-items: center;
-  width: rem(80);
-
-  .track-index {
-    width: rem(16);
-    font-size: var(--text-s);
-    color: var(--color-text-muted);
-  }
+.track-index {
+  width: rem(16);
+  font-size: var(--text-s);
+  color: var(--color-text-muted);
+  text-align: center;
 }
 
 .track-main-info {
+  display: flex;
   flex-grow: 1;
+  align-items: center;
+
   min-width: 0;
-}
-
-.track-album,
-.track-duration {
-  color: var(--color-text-muted);
-}
-
-.track-album {
-  font-size: var(--text-s);
-}
-
-.track-duration {
-  font-size: var(--text-s);
+  min-width: calc(var(--track-text-min-width) + var(--track-cover-width) + var(--space-m));
 }
 
 .track-meta-slot {
   display: flex;
+  flex: 0 1 rem(300);
   align-items: center;
-  width: rem(300);
+
+  min-width: rem(110);
+
+  font-size: var(--text-s);
   color: var(--color-text-muted);
+
+  @media (width <= 710px) {
+    display: none;
+  }
 
   @include mix.mobile {
     display: none;
@@ -68,9 +70,26 @@
 
 .track-actions-slot {
   display: flex;
+  flex-basis: rem(100);
   flex-shrink: 0;
   align-items: center;
+  justify-content: flex-end;
+}
 
-  width: rem(100);
-  padding-left: rem(10);
+.track-clock {
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 0;
+  justify-content: center;
+
+  width: rem(16);
+  height: rem(16);
+
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.track-spacer {
+  flex-shrink: 0;
+  width: rem(16);
 }

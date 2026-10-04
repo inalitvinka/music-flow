@@ -1,0 +1,68 @@
+@use 'utils/funcs' as *;
+@use 'utils/mixins' as mix;
+@use 'utils/placeholders';
+@use '@taiga-ui/styles/utils' as taiga;
+
+.search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: var(--space-2xl);
+  padding: var(--space-xl) 0 0;
+  border-top: 1px solid var(--color-surface-secondary);
+}
+
+.search-bar {
+  --tui-text-secondary: var(--color-text);
+  --tui-background-elevation-3: transparent;
+  --tui-border-normal: none;
+
+  // --tui-padding-l: var(--space-s);
+  margin-top: var(--space-l);
+  border-width: none;
+  border-radius: var(--radius-s);
+  background-color: var(--color-surface-secondary);
+
+  ::placeholder {
+    color: var(--color-text-subtle);
+  }
+  @include taiga.appearance-hover {
+    background-color: var(--color-surface-secondary);
+  }
+  @include taiga.appearance-focus {
+    background-color: var(--color-surface-secondary);
+    outline: none;
+
+    &::before {
+      color: var(--color-text);
+    }
+  }
+}
+
+.search-close {
+  &-icon {
+    width: rem(24);
+    height: rem(24);
+  }
+}
+
+.track-album {
+  @extend %ellipsis;
+  @media (width <= 710px) {
+    display: none;
+  }
+}
+
+.track-add {
+  border: none;
+  background: none;
+  @include mix.hover {
+    cursor: pointer;
+    color: var(--color-success);
+  }
+}
+
+.track-add {
+  width: rem(34);
+}

@@ -15,7 +15,7 @@ import { TrackCover } from '../track-cover/track-cover';
 })
 export class TrackRow {
   track = input.required<Track>();
-  index = input.required<number>();
+  index = input<number | null>(null);
 
   isPlaying = input(false);
 

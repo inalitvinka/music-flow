@@ -1,27 +1,61 @@
 @use 'utils/funcs' as *;
 @use 'utils/mixins' as mix;
+@use 'utils/placeholders';
 
 :host {
-  // TODO: choose a more appropriate color
-  // --playlist-color: var(--color-text-subtle);
   --playlist-color: var(--color-accent);
+  --tui-border-normal: none;
 
   display: flex;
   flex-direction: column;
   gap: var(--space-xl);
   padding: 0 var(--space-xl);
+
+  @include mix.tablet {
+    padding: 0 var(--space-2xs);
+  }
+
+  @include mix.mobile {
+    padding: 0 var(--space-2xs);
+  }
+}
+
+.search-open {
+  margin-left: auto;
+  font-weight: 700;
+}
+
+.track-album {
+  @extend %ellipsis;
+  @media (width <= 710px) {
+    display: none;
+  }
+}
+
+.track-duration,
+.track-remove {
+  color: var(--color-text-muted);
+  @media (width <= 425.9px) {
+    font-size: var(--text-2xs);
+  }
+}
+
+.track-remove,
+.track-add {
+  border: none;
+  background: none;
+  @include mix.hover {
+    cursor: pointer;
+    color: var(--color-success);
+  }
 }
 
 .track-remove {
-  width: rem(30);
-  border: none;
-  color: var(--color-text-muted);
-  background: none;
+  width: rem(26);
+}
 
-  &:hover {
-    cursor: pointer;
-    color: var(--color-text);
-  }
+.track-add {
+  width: rem(34);
 }
 
 .confirm {
@@ -30,7 +64,7 @@
   gap: var(--space-s);
   align-items: center;
 
-  padding: rem(8) 0;
+  padding: var(--space-s) 0;
 
   &-text {
     margin: 0 0 rem(10);
@@ -47,4 +81,27 @@
   &-delete {
     background-color: var(--color-error);
   }
+}
+
+.cdk-drag-placeholder {
+  border-top: 1px solid var(--color-success);
+}
+
+.cdk-drop-list-dragging .player-track-row:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.custom-drag-preview {
+  @extend %ellipsis;
+
+  max-width: rem(550);
+  padding: var(--space-s) var(--space-m);
+  border-radius: var(--radius-s);
+
+  font-size: var(--text-m);
+  font-weight: 500;
+  color: var(--color-text);
+
+  opacity: 0.5;
+  background-color: var(--color-surface-secondary);
 }

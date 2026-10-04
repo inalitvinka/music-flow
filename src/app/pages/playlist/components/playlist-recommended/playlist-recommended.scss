@@ -1,0 +1,45 @@
+@use 'utils/funcs' as *;
+@use 'utils/mixins' as mix;
+@use 'utils/placeholders';
+
+.recommend-list {
+  margin-top: var(--space-xl);
+}
+
+.track-album {
+  @extend %ellipsis;
+  @media (width <= 710px) {
+    display: none;
+  }
+}
+
+.track-remove {
+  color: var(--color-text-muted);
+  @media (width <= 425.9px) {
+    font-size: var(--text-2xs);
+  }
+}
+
+.track-remove,
+.track-add {
+  border: none;
+  background: none;
+  @include mix.hover {
+    cursor: pointer;
+    color: var(--color-success);
+  }
+}
+
+.track-remove {
+  width: rem(26);
+}
+
+.track-add {
+  width: rem(34);
+}
+
+.refresh-button {
+  margin-top: var(--space-xl);
+  margin-left: auto;
+  font-weight: 700;
+}

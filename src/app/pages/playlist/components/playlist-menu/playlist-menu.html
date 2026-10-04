@@ -1,26 +1,10 @@
-<button
-  type="button"
-  class="playlist-delete"
-  [attr.aria-expanded]="isDropdownOpen()"
-  [tuiDropdown]="dropdownContent"
-  [tuiDropdownManual]="isDropdownOpen()"
-  [tuiObscuredEnabled]="isDropdownOpen()"
-  (click)="onDotsClick()"
-  (tuiActiveZoneChange)="onActiveZone($event)"
-  (tuiObscured)="onObscured($event)"
-  aria-label="Playlist options"
->
-  <player-sprite icon="menu-kebab-vert" />
-</button>
-<ng-template #dropdownContent>
-  <tui-data-list class="playlist-menu-list">
-    <button tuiOption type="button" (click)="onActionClick('edit')">
-      <player-sprite icon="edit" class="menu-icon" />
-      <span>Edit details</span>
-    </button>
-    <button tuiOption type="button" (click)="onActionClick('delete')">
-      <player-sprite icon="delete" class="menu-icon" />
-      <span>Delete playlist</span>
-    </button>
-  </tui-data-list>
-</ng-template>
+<player-context-menu size="large">
+  <button tuiOption type="button" (click)="editClicked.emit()">
+    <player-sprite icon="edit" />
+    <span>Edit details</span>
+  </button>
+  <button tuiOption type="button" (click)="deleteClicked.emit()">
+    <player-sprite icon="delete" />
+    <span>Delete playlist</span>
+  </button>
+</player-context-menu>

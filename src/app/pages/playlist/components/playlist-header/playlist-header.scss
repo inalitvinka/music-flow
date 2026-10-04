@@ -1,7 +1,8 @@
 @use 'utils/funcs' as *;
 @use 'utils/mixins' as mix;
+@use 'utils/placeholders';
 
-.playlist-header-container {
+.playlist-header {
   position: relative;
 
   display: flex;
@@ -9,28 +10,41 @@
   gap: var(--space-3xl);
 
   margin-bottom: var(--space-s);
-  padding: var(--space-xl) var(--space-xl) var(--space-2xl);
+  padding: var(--space-xl) var(--space-xl) var(--space-3xl);
   border-radius: var(--radius-m);
 
   background-color: var(--color-bg-primary);
   background-image: linear-gradient(to bottom, var(--playlist-color), transparent);
-}
 
-.playlist-header {
-  display: flex;
-  gap: var(--space-xl);
-  align-items: flex-end;
+  @include mix.tablet {
+    gap: var(--space-xl);
+    padding: var(--space-l);
+  }
 
   @include mix.mobile {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    gap: var(--space-m);
+    padding: var(--space-m);
+  }
+
+  &-container {
+    display: flex;
+    gap: var(--space-xl);
+    align-items: flex-end;
+
+    @include mix.tablet {
+      gap: var(--space-l);
+    }
+
+    @include mix.mobile {
+      flex-direction: column;
+      gap: var(--space-l);
+      align-items: center;
+      text-align: center;
+    }
   }
 }
 
-.playlist-cover-wrapper {
-  cursor: pointer;
-
+.playlist-cover {
   position: relative;
 
   overflow: hidden;
@@ -45,14 +59,24 @@
 
   background-color: var(--color-surface);
 
-  .playlist-cover-icon {
+  &-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &-icon {
     width: rem(64);
     height: rem(64);
     color: var(--color-text-muted);
+  }
+
+  &-img,
+  &-icon {
     @include mix.main-transition('opacity');
   }
 
-  .cover-hover-overlay {
+  &-overlay {
     position: absolute;
     inset: 0;
 
@@ -62,8 +86,7 @@
     align-items: center;
     justify-content: center;
 
-    // FIXME: replace with project base color
-    background-color: rgb(0 0 0 / 5%);
+    background-color: var(--color-bg-primary);
 
     @include mix.hidden(true);
     @include mix.main-transition('opacity, visibility');
@@ -82,13 +105,36 @@
   }
 
   @include mix.hover {
-    .cover-hover-overlay {
+    cursor: pointer;
+
+    .playlist-cover-overlay {
       @include mix.hidden(false);
     }
 
     .playlist-cover-icon {
       opacity: 0;
     }
+
+    .playlist-cover-mosaic,
+    .playlist-cover-img {
+      opacity: 0.3;
+    }
+  }
+}
+
+.playlist-cover-mosaic {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+
+  @include mix.main-transition('opacity');
+
+  .playlist-cover-img {
+    flex-shrink: 0;
+    width: 50%;
+    height: 50%;
+    object-fit: cover;
   }
 }
 
@@ -104,19 +150,29 @@
     font-size: var(--text-s);
     font-weight: 700;
     color: var(--color-text-muted);
+    text-align: start;
     letter-spacing: 1px;
   }
 
   .playlist-title {
+    @extend %ellipsis;
+
+    width: 100%;
     margin: 0;
 
-    font-size: rem(48);
+    font-size: var(--text-4xl);
     font-weight: 900;
     line-height: 1.1;
     color: var(--color-text);
+
+    @include mix.tablet {
+      font-size: var(--text-3xl);
+    }
   }
 
   .playlist-description {
+    @extend %ellipsis;
+
     margin: var(--space-xs) 0 0 0;
     font-size: var(--text-s);
     color: var(--color-text-muted);
@@ -125,6 +181,7 @@
 
 .playlist-stats {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--space-xs);
   align-items: center;
 
@@ -132,38 +189,26 @@
 
   font-size: var(--text-m);
   font-weight: 500;
-  color: var(--color-text);
+  color: var(--color-text-muted);
 
-  .playlist-displayname {
-    font-weight: 800;
+  @include mix.tablet {
+    font-size: var(--text-s);
   }
 
-  .playlist-total-time,
-  .playlist-tracks-count,
-  .playlist-header-separator {
-    color: var(--color-text-muted);
+  @include mix.mobile {
+    justify-content: center;
   }
 
   .playlist-header-separator {
     font-size: var(--text-xs);
   }
-
-  .playlist-total-time {
-    display: flex;
-    gap: var(--space-xs);
-    align-items: center;
-  }
-
-  .playlist-total-clock {
-    width: rem(16);
-  }
 }
 
-.palylist-header-actions {
+.playlist-header-actions {
   display: flex;
   gap: var(--space-l);
   align-items: center;
-  padding: 0 var(--space-l);
+  padding: 0 var(--space-xl);
 
   .playlist-header-play-btn {
     --button-bg: var(--color-success);

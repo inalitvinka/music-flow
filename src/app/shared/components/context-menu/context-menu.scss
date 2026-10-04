@@ -1,0 +1,70 @@
+@use 'utils/funcs' as *;
+@use 'utils/mixins' as mix;
+
+.menu-delete {
+  transform: rotate(90deg);
+
+  width: rem(30);
+  height: rem(30);
+  border: none;
+
+  color: var(--color-text-muted);
+
+  background: none;
+
+  &:hover {
+    cursor: pointer;
+    color: var(--color-text);
+  }
+
+  &.is-large {
+    width: rem(40);
+    height: rem(40);
+  }
+
+  @include mix.mobile {
+    transform: rotate(0deg);
+  }
+}
+
+/* stylelint-disable-next-line selector-pseudo-element-no-unknown */
+::ng-deep [data-appearance='menu-dropdown'] {
+  --tui-border-normal: none;
+
+  overflow: hidden;
+  border-radius: var(--radius-s);
+  background-color: var(--color-bg);
+
+  tui-data-list.menu-list {
+    overflow: hidden;
+    background-color: var(--color-bg);
+
+    button[tuiOption] {
+      display: flex;
+      gap: var(--space-m);
+      align-items: center;
+
+      width: 100%;
+      padding: var(--space-s) var(--space-l);
+      border: none;
+      border-radius: var(--radius-s);
+
+      font-size: var(--text-s);
+      color: var(--color-text);
+
+      background-color: var(--color-bg);
+      @include mix.main-transition('background-color, color');
+
+      &:hover {
+        cursor: pointer;
+        background-color: var(--color-surface);
+      }
+
+      player-sprite {
+        width: rem(16);
+        height: rem(16);
+        color: var(--color-text-muted);
+      }
+    }
+  }
+}

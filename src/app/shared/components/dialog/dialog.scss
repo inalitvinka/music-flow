@@ -1,16 +1,16 @@
 @use 'utils/mixins' as mix;
+@use '@taiga-ui/styles/utils' as taiga;
 
 tui-dialog[data-appearance~='taiga'] {
+  --tui-background-neutral-1: transparent;
+  --tui-background-neutral-1-hover: transparent;
+
   padding: 0;
   border: var(--border);
   border-radius: var(--radius-l);
   background-color: var(--color-bg-secondary);
 }
 
-tui-dialog [data-appearance~='icon'] {
+tui-dialog[data-appearance~='icon'] {
   color: var(--color-text-muted);
-
-  &:hover {
-    color: var(--color-text);
-  }
 }

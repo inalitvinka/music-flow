@@ -1,8 +1,8 @@
-import { Injectable, inject } from '@angular/core';
+import { Service, inject } from '@angular/core';
 import { FirestoreService } from '../firestore/firestore-service';
 import { CreatePlaylistInput, UpdatePlaylistInput } from '@app/shared/models/firestore.model';
 
-@Injectable()
+@Service()
 export class PlaylistApiService {
   private firestoreService = inject(FirestoreService);
 

@@ -1,14 +1,18 @@
 @let t = track();
+@let idx = index();
 
 <div class="track-row" (mouseenter)="isHovered.set(true)" (mouseleave)="isHovered.set(false)">
-  <div class="track-left-side">
-    <span class="track-index">{{ index() + 1 }}</span>
+  @if (idx !== null) {
+    <span class="track-index">{{ idx + 1 }}</span>
+  }
+  <div class="track-cover">
     <player-track-cover
       [track]="t"
       variant="secondary"
       [isHovered]="isHovered()"
       [isPlaying]="isPlaying()"
       (playClicked)="playClicked.emit($event)"
+      class="track-btn"
     />
   </div>
   <div class="track-main-info">

@@ -1,0 +1,21 @@
+<button
+  type="button"
+  class="menu-delete"
+  [class.is-large]="size() === 'large'"
+  [attr.aria-expanded]="isDropdownOpen()"
+  [tuiDropdown]="dropdownContent"
+  tuiDropdownAppearance="menu-dropdown"
+  [tuiDropdownManual]="isDropdownOpen()"
+  [tuiObscuredEnabled]="isDropdownOpen()"
+  (click)="onDotsClick($event)"
+  (tuiActiveZoneChange)="onActiveZone($event)"
+  (tuiObscured)="onObscured($event)"
+  aria-label="Playlist options"
+>
+  <player-sprite [icon]="triggerIcon()" />
+</button>
+<ng-template #dropdownContent>
+  <tui-data-list class="menu-list" (click)="close()">
+    <ng-content />
+  </tui-data-list>
+</ng-template>

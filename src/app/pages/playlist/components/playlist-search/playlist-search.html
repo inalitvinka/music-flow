@@ -1,0 +1,43 @@
+<div class="search">
+  <div>
+    <h2>Find songs for your playlist</h2>
+    <tui-textfield iconStart="@tui.search" [tuiTextfieldCleaner]="false" class="search-bar">
+      <input
+        #searchInput
+        placeholder="Search for something new"
+        tuiInput
+        [value]="searchQuery()"
+        (input)="onInput(searchInput.value)"
+      />
+      <button
+        tuiButtonX
+        size="xl"
+        (click)="clearSearchInput()"
+        aria-label="clear search input"
+      ></button>
+    </tui-textfield>
+  </div>
+  <button
+    playerButton
+    variant="base"
+    size="small"
+    (click)="closeSearch.emit()"
+    class="search-close"
+  >
+    <player-sprite icon="close" class="search-close-icon" />
+  </button>
+</div>
+<div>
+  @for (track of tracks(); track track.id) {
+    <player-track-row [track]="track">
+      <span row-meta class="track-album">{{ track.album.name }}</span>
+      <button row-actions class="track-add" (click)="trackAdd.emit(track)">
+        <player-sprite icon="add-track" />
+      </button>
+    </player-track-row>
+  } @empty {
+    @if (searchQuery().length >= MIN_SEARCH_LENGTH) {
+      <p>No tracks found for "{{ searchQuery() }}"</p>
+    }
+  }
+</div>
