@@ -6,8 +6,8 @@ import { Button } from '@app/shared/components/button/button';
 import { FormTextfield } from '@app/shared/components/form-textfield/form-textfield';
 import { Sprite } from '@app/shared/components/sprite/sprite';
 import { getErrorMessage } from '@app/shared/utils/error.utils';
+import { useServerErrorResetter } from '@app/shared/utils/server-error-resetter.utils';
 import { LOGIN_INITIAL_MODEL, LoginFormData } from '../form/models/login.model';
-import { useServerErrorResetter } from '../form/utils/server-error-resetter';
 import { loginSchemaFn } from './login.schema';
 
 @Component({
