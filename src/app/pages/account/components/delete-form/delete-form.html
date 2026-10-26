@@ -1,0 +1,30 @@
+<h2 class="title">Delete Account</h2>
+<p class="title">Are you sure you want to permanently delete your account?</p>
+<form [formRoot]="deleteAccountForm" (submit)="onSubmit()" class="form">
+  <player-form-textfield
+    type="password"
+    [formField]="deleteAccountForm.password"
+    placeholder="Current Password"
+    [invalid]="deleteAccountForm.password().touched() && deleteAccountForm.password().invalid()"
+  />
+  @if (serverError()) {
+    <div class="server-error">
+      <player-sprite icon="error-outlined" class="icon" />
+      <p>{{ serverError() }}</p>
+    </div>
+  }
+  <div class="btn-container">
+    <button playerButton variant="base" size="small" (click)="onCancelClick()">Cancel</button>
+    <button
+      playerButton
+      type="submit"
+      variant="danger"
+      size="small"
+      class="confirm-delete"
+      [loading]="isLoading()"
+      [disabled]="!!serverError()"
+    >
+      Delete
+    </button>
+  </div>
+</form>

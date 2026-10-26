@@ -1,0 +1,27 @@
+@use 'utils/placeholders' as *;
+@use 'utils/funcs' as *;
+
+.title {
+  margin-bottom: rem(36);
+  text-align: center;
+}
+
+.form {
+  @extend %form-container;
+  @extend %form-layout;
+}
+
+.server-error {
+  @extend %form-server-error;
+}
+
+.btn-container {
+  display: flex;
+  gap: var(--space-s);
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.confirm-delete {
+  background-color: var(--color-error);
+}
