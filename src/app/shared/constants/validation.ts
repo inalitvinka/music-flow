@@ -23,6 +23,8 @@ export const ValidationMessage = {
   NoSpaces: 'Spaces not allowed',
   InvalidEmail: 'Invalid email (e.g., login@domain.com)',
   PasswordMismatch: 'Passwords mismatch',
+  PasswordMustDiffer: 'New password must differ from the current password',
+  EmailMustDiffer: 'New email must differ from the current email',
   MinLen: (len: number) => `Min ${len} chars`,
   MaxLen: (len: number) => `Max ${len} chars`,
 } as const;
