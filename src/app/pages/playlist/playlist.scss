@@ -77,10 +77,6 @@
     gap: var(--space-s);
     margin-top: var(--space-m);
   }
-
-  &-delete {
-    background-color: var(--color-error);
-  }
 }
 
 .cdk-drag-placeholder {

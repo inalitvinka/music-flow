@@ -80,6 +80,18 @@ $focused-selector: ':not(#{$loading-selector})';
     @include hover-active;
   }
 
+  &.danger {
+    --button-bg: var(--color-error);
+    --button-color: var(--color-text);
+    --button-bg-focus: var(--color-text);
+    --button-color-focus: var(--color-error);
+
+    color: var(--button-color);
+    background-color: var(--button-bg);
+
+    @include hover-active;
+  }
+
   .icon {
     height: var(--button-icon-size);
     margin-right: var(--button-icon-indent);

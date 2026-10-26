@@ -2,11 +2,11 @@ import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/cor
 import { form } from '@angular/forms/signals';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '@app/core/services/auth/auth-service';
-import { useServerErrorResetter } from '@app/pages/auth/form/utils/server-error-resetter';
 import { Button } from '@app/shared/components/button/button';
 import { FormTextfield } from '@app/shared/components/form-textfield/form-textfield';
 import { Sprite } from '@app/shared/components/sprite/sprite';
 import { getErrorMessage } from '@app/shared/utils/error.utils';
+import { useServerErrorResetter } from '@app/shared/utils/server-error-resetter.utils';
 import { SIGNUP_INITIAL_MODEL, SignupFormData } from '../form/models/signup.model';
 import { signupSchemaFn } from './signup.schema';
 

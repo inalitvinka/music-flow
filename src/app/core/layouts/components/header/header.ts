@@ -14,10 +14,21 @@ import { AuthService } from '@app/core/services/auth/auth-service';
 import { ViewportService } from '@app/core/services/viewport/viewport-service';
 import { Button } from '@app/shared/components/button/button';
 import { TuiButtonX, TuiInput } from '@taiga-ui/core';
+import { ContextMenu } from '@shared/components/context-menu/context-menu';
+import { Sprite } from '@app/shared/components/sprite/sprite';
 
 @Component({
   selector: 'player-header',
-  imports: [Button, FormsModule, TuiInput, RouterLink, RouterLinkActive, TuiButtonX],
+  imports: [
+    Button,
+    FormsModule,
+    TuiInput,
+    RouterLink,
+    RouterLinkActive,
+    TuiButtonX,
+    ContextMenu,
+    Sprite,
+  ],
   providers: [SearchService],
   templateUrl: './header.html',
   styleUrl: './header.scss',

@@ -16,6 +16,7 @@ type ButtonType = HTMLButtonElement['type'];
     '[class.base]': 'variant() === "base"',
     '[class.primary]': 'variant() === "primary"',
     '[class.secondary]': 'variant() === "secondary"',
+    '[class.danger]': 'variant() === "danger"',
     '[class.small]': 'size() === "small"',
     '[class.loading]': 'loading()',
     '[disabled]': 'disabled() || loading()',

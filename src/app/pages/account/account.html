@@ -1,0 +1,44 @@
+<h1 class="title">Personal Details</h1>
+<section class="info">
+  <div>
+    <p class="label">Display name</p>
+    <p class="value">{{ user()?.displayName || 'Not set' }}</p>
+  </div>
+  <button playerButton variant="base" size="small" (click)="openDialog('displayName')">
+    Change
+  </button>
+</section>
+<section class="info">
+  <div>
+    <p class="label">Email address</p>
+    <p class="value">{{ user()?.email }}</p>
+  </div>
+  <button playerButton variant="base" size="small" (click)="openDialog('email')">Change</button>
+</section>
+<section class="info">
+  <div>
+    <p class="label">Password</p>
+    <p class="value">••••••••••</p>
+  </div>
+  <button playerButton variant="base" size="small" (click)="openDialog('password')">Change</button>
+</section>
+<section class="info">
+  <p class="value danger-text">Delete account</p>
+  <button playerButton variant="danger" size="small" (click)="openDialog('delete')">Delete</button>
+</section>
+<player-dialog [isOpen]="dialogType() !== null" (closeDialog)="closeDialog()">
+  @switch (dialogType()) {
+    @case ('displayName') {
+      <player-display-name-form (formsubmitted)="closeDialog()" />
+    }
+    @case ('email') {
+      <player-email-form (formsubmitted)="closeDialog()" />
+    }
+    @case ('password') {
+      <player-password-form (formsubmitted)="closeDialog()" />
+    }
+    @case ('delete') {
+      <player-delete-form (formsubmitted)="closeDialog()" />
+    }
+  }
+</player-dialog>

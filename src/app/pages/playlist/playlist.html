@@ -62,15 +62,7 @@
       <button playerButton variant="base" size="small" (click)="isDeleteModalOpen.set(false)">
         Cancel
       </button>
-      <button
-        playerButton
-        variant="base"
-        size="small"
-        (click)="deletePlaylist()"
-        class="confirm-delete"
-      >
-        Delete
-      </button>
+      <button playerButton variant="danger" size="small" (click)="deletePlaylist()">Delete</button>
     </div>
   </div>
 </player-dialog>
