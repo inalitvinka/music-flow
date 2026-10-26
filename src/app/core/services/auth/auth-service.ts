@@ -98,10 +98,10 @@ export class AuthService {
     }
   }
 
-  async updateDisplayName(newName: string) {
+  async updateDisplayName(displayName: string) {
     try {
       const user = this.getRequiredUser();
-      await updateProfile(user, { displayName: newName });
+      await updateProfile(user, { displayName });
       this._user.set({ ...user });
     } catch (error) {
       this.handleError(error, 'updateDisplayName');
@@ -112,7 +112,9 @@ export class AuthService {
   async updateEmail(newEmail: string, currentPassword: string) {
     try {
       const user = await this.reauthenticate(currentPassword);
-      await verifyBeforeUpdateEmail(user, newEmail);
+      await verifyBeforeUpdateEmail(user, newEmail, {
+        url: `${window.location.origin}/account`,
+      });
       this._user.set({ ...user });
     } catch (error) {
       this.handleError(error, 'updateEmail');
