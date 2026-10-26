@@ -1,0 +1,53 @@
+@use 'utils/funcs' as *;
+@use 'utils';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: rem(36);
+
+  width: 100%;
+  max-width: rem(800);
+  margin: 0 auto;
+  padding: var(--space-2xl) var(--space-xl);
+  border-radius: var(--radius-l);
+
+  background-color: var(--color-bg-secondary);
+}
+
+.title {
+  text-align: left;
+}
+
+.info {
+  display: flex;
+  gap: var(--space-s);
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+
+  &:not(:last-of-type) {
+    padding: 0 0 var(--space-xl);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  &:last-of-type {
+    margin-top: var(--space-xl);
+  }
+}
+
+.label {
+  margin-bottom: var(--space-xs);
+  font-size: var(--text-m);
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.value {
+  font-size: var(--text-m);
+}
+
+.danger-text {
+  color: var(--color-error);
+}
