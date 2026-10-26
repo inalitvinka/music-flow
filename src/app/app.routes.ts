@@ -44,6 +44,12 @@ export const routes: Routes = [
     loadComponent: () => import('@app/pages/search/search').then((m) => m.Search),
   },
   {
+    path: 'account',
+    loadComponent: () => import('@pages/account/account').then((m) => m.Account),
+    canActivate: [authGuard],
+    data: { [REQUIRES_AUTH]: true },
+  },
+  {
     path: '**',
     loadComponent: () => import('@pages/not-found/not-found').then((m) => m.NotFound),
   },
