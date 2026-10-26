@@ -14,9 +14,19 @@
         (click)="openMenu()"
       ></button>
     } @else if (authService.isAuthenticated()) {
-      <button playerButton variant="secondary" class="profile-btn" size="small" (click)="logout()">
+      <ng-template #profileTrigger>
         {{ userNameInitial() }}
-      </button>
+      </ng-template>
+      <player-context-menu size="small" variant="profile" [triggerTemplate]="profileTrigger">
+        <button tuiOption type="button" routerLink="/account">
+          <player-sprite icon="account" />
+          <span>Account</span>
+        </button>
+        <button tuiOption type="button" (click)="logout()">
+          <player-sprite icon="logout" />
+          <span>Log out</span>
+        </button>
+      </player-context-menu>
     } @else {
       <button
         playerButton
