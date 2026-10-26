@@ -1,19 +1,25 @@
 <button
   type="button"
-  class="menu-delete"
+  class="menu-trigger"
+  [class.base]="variant() === 'base'"
+  [class.profile]="variant() === 'profile'"
   [class.is-large]="size() === 'large'"
+  [class.is-small]="size() === 'small'"
   [attr.aria-expanded]="isDropdownOpen()"
   [tuiDropdown]="dropdownContent"
   tuiDropdownAppearance="menu-dropdown"
   [tuiDropdownManual]="isDropdownOpen()"
   [tuiObscuredEnabled]="isDropdownOpen()"
-  (click)="onDotsClick($event)"
+  (click)="onClick($event)"
   (tuiActiveZoneChange)="onActiveZone($event)"
   (tuiObscured)="onObscured($event)"
   aria-label="Playlist options"
 >
-  <player-sprite [icon]="triggerIcon()" />
+  <ng-container [ngTemplateOutlet]="triggerTemplate() ?? defaultTrigger" />
 </button>
+<ng-template #defaultTrigger>
+  <player-sprite [icon]="triggerIcon()" />
+</ng-template>
 <ng-template #dropdownContent>
   <tui-data-list class="menu-list" (click)="close()">
     <ng-content />

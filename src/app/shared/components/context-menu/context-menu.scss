@@ -1,30 +1,64 @@
+@use 'utils/vars' as *;
 @use 'utils/funcs' as *;
 @use 'utils/mixins' as mix;
+@use '@taiga-ui/styles/utils' as taiga;
 
-.menu-delete {
-  transform: rotate(90deg);
-
-  width: rem(30);
-  height: rem(30);
+.menu-trigger {
   border: none;
 
-  color: var(--color-text-muted);
+  @include mix.supports-hover {
+    cursor: pointer;
+  }
+}
 
+.base {
+  color: var(--color-text-muted);
   background: none;
 
-  &:hover {
-    cursor: pointer;
+  @include mix.main-transition('color');
+
+  @include mix.hover {
     color: var(--color-text);
   }
 
-  &.is-large {
-    width: rem(40);
-    height: rem(40);
+  &:active {
+    color: var(--color-text);
+  }
+}
+
+.profile {
+  flex-shrink: 0;
+
+  aspect-ratio: 1;
+  border-radius: var(--radius-full);
+
+  font-size: var(--text-m);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--color-text-inverse);
+
+  background: var(--color-accent-secondary);
+  outline: rem(7) solid var(--color-border);
+
+  @include mix.main-transition('background-color');
+
+  @include mix.hover {
+    background-color: var(--color-text);
   }
 
-  @include mix.mobile {
-    transform: rotate(0deg);
+  &:active {
+    background-color: var(--color-text);
   }
+}
+
+.is-large {
+  width: rem(40);
+  height: rem(40);
+}
+
+.is-small {
+  width: rem(30);
+  height: rem(30);
 }
 
 /* stylelint-disable-next-line selector-pseudo-element-no-unknown */
