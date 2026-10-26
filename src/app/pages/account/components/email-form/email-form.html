@@ -1,0 +1,30 @@
+<h2 class="title">Change Email</h2>
+<form [formRoot]="emailForm" (submit)="onSubmit()" class="form">
+  <player-form-textfield
+    [formField]="emailForm.email"
+    placeholder="New Email"
+    [invalid]="emailForm.email().touched() && emailForm.email().invalid()"
+  />
+  <player-form-textfield
+    type="password"
+    [formField]="emailForm.password"
+    placeholder="Current Password"
+    [invalid]="emailForm.password().touched() && emailForm.password().invalid()"
+  />
+  @if (serverError()) {
+    <div class="server-error">
+      <player-sprite icon="error-outlined" class="icon" />
+      <p>{{ serverError() }}</p>
+    </div>
+  }
+  <button
+    playerButton
+    type="submit"
+    class="submit"
+    variant="secondary"
+    [loading]="isLoading()"
+    [disabled]="!!serverError()"
+  >
+    Save
+  </button>
+</form>
